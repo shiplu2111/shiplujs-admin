@@ -29,6 +29,13 @@ class SocialMediaResource extends Resource
                 Forms\Components\TextInput::make('name')->required()->required(),
                 Forms\Components\TextInput::make('logo')->required()->required(),
                 Forms\Components\TextInput::make('link')->required()->columnSpan(2),
+
+                Forms\Components\Select::make('status')
+                ->options([
+                    'Draft' => 'Draft',
+                    'Reviewing' => 'Reviewing',
+                    'Published' => 'Published',
+                ])
             ]);
     }
 
@@ -40,6 +47,7 @@ class SocialMediaResource extends Resource
                 Tables\Columns\TextColumn::make('logo'),
                 // ->icon(fn($state)=> $state ),
                 Tables\Columns\TextColumn::make('link'),
+
             ])
             ->filters([
                 //

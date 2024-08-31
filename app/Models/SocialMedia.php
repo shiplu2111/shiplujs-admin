@@ -12,5 +12,7 @@ class SocialMedia extends Model
         'name',
         'logo',
         'link',
+        'status',
+
     ];
 }
