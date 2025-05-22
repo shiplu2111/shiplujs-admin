@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('socials', function (Blueprint $table) {
             $table->id();
+            $table->string('name')->nullable();
             $table->string('icon')->nullable();
-            $table->string('url')->nullable();
-            $table->string('status')->nullable();
+            $table->string('url')->nullable()->default('#');
+            $table->boolean('status')->default(true);
             $table->timestamps();
         });
     }

@@ -18,12 +18,18 @@ use Filament\Forms\Components\Tabs;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Actions\EditAction;
 use Filament\Notifications\Notification;
+use Filament\Tables\Columns\ImageColumn;
+use Filament\Tables\Columns\ToggleColumn;
+use Filament\Forms\Components\ToggleButtons;
 class SettingResource extends Resource
 {
     protected static ?string $model = Setting::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-
+    protected static ?string $navigationIcon = 'heroicon-o-cog';
+    public static function getNavigationGroup(): ?string
+    {
+        return 'Settings'; // Match this to a group from navigationGroups()
+    }
     public static function form(Form $form): Form
     {
         return $form
@@ -65,7 +71,10 @@ class SettingResource extends Resource
                     TextColumn::make('site_name')->label('Site Name'),
                     TextColumn::make('email')->label('Email'),
                     TextColumn::make('website_url')->label('Website URL'),
-                ])
+                    ImageColumn::make('logo')->label('Logo'),
+                    ImageColumn::make('favicon')->label('Favicon')->circular(),
+                    ImageColumn::make('preloader')->label('Preloader'),
+                ])->paginated(false)
             ->filters([
                 //
             ])

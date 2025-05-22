@@ -17,7 +17,8 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
-
+use Filament\Navigation\NavigationGroup;
+use Filament\Navigation\NavigationItem;
 class AdminPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
@@ -51,8 +52,29 @@ class AdminPanelProvider extends PanelProvider
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
             ])
+            // ->topNavigation()
             ->authMiddleware([
                 Authenticate::class,
-            ]);
+            ])
+            ->navigationGroups([
+            NavigationGroup::make()
+                ->label('Blog')
+                ->icon('heroicon-o-pencil')
+                ->collapsed(),
+
+            NavigationGroup::make()
+                ->label(fn (): string => __('navigation.settings'))
+                ->icon('heroicon-s-cog')
+                ->collapsed(),
+        ])
+        // ->navigationItems([
+        //     NavigationItem::make('Developer')
+        //         ->url('https://shiplujs.com', shouldOpenInNewTab: true)
+        //         ->icon('heroicon-o-presentation-chart-line')
+        //         ->group('❤️ Developer')
+        //         ->sort(3),
+
+        // ])
+        ;
     }
 }
