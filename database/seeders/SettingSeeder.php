@@ -15,9 +15,9 @@ class SettingSeeder extends Seeder
     {
          $data = [
             'site_name' => 'Shiplu JS',
-            'logo' =>  '01JVVJF5C1754QNN5JJWC14294.png',
-            'favicon' =>  '01JVVJF5C2ANTJPBAVSMNK8BKK.png',
-            'preloader' =>  '01JVVJF5C4NB50A6NZQRZSCKE0.png',
+            'logo' =>  '01JVVKMGG70WXA0F7XPAKY2K19.png',
+            'favicon' =>  '01JVVKMGG9AHTBSF70QNZGMJD0.png',
+            'preloader' =>  '01JVVKMGGBRY27C0DT086Q0E2H.png',
             'email' => 'me@shiplujs.com',
             'website_url' => 'https://shiplujs.com/',
             'phone' => '01711002919',
