@@ -7,6 +7,7 @@
 /storage/*.log     # <--- optionally ignore log files
 /storage/app/*
 !/storage/app/.gitignore
+!/storage/app/public/*
 /storage/framework/*
 !/storage/framework/.gitignore
 /storage/logs/*
