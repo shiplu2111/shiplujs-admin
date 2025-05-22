@@ -5,13 +5,8 @@
 /public/*
 /storage/*.key     # <--- ignore sensitive keys
 /storage/*.log     # <--- optionally ignore log files
-/storage/app/*
-!/storage/app/.gitignore
-!/storage/app/public/*
 /storage/framework/*
-!/storage/framework/.gitignore
 /storage/logs/*
-!/storage/logs/.gitignore
 /vendor
 .env
 .env.backup
