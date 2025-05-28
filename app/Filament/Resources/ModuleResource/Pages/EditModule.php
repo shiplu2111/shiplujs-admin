@@ -1,16 +1,15 @@
 <?php
 
-namespace App\Filament\Resources\EmailSetupResource\Pages;
+namespace App\Filament\Resources\ModuleResource\Pages;
 
-use App\Filament\Resources\EmailSetupResource;
+use App\Filament\Resources\ModuleResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
 use Filament\Notifications\Notification;
-use Illuminate\Support\Facades\Artisan;
-class EditEmailSetup extends EditRecord
-{
 
-    protected static string $resource = EmailSetupResource::class;
+class EditModule extends EditRecord
+{
+    protected static string $resource = ModuleResource::class;
 
      protected function getHeaderActions(): array
     {
@@ -21,17 +20,15 @@ class EditEmailSetup extends EditRecord
     }
      protected function getRedirectUrl(): string
     {
-
         return $this->getResource()::getUrl('index');
     }
 
     protected function getSavedNotification(): ?Notification
     {
         return  Notification::make()
-            ->title('SMTP Updated 💃💃')
-            ->body('The SMTP setup has been updated successfully!! .')
+            ->title('Module Setting Updated')
+            ->body('The Module Setting has been successfully Updated 💃💃.')
             ->success()
             ->send();
     }
-
 }

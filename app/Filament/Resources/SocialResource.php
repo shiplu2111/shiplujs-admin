@@ -78,7 +78,7 @@ class SocialResource extends Resource
             ])->defaultSort('id', 'desc')
 
             ->actions([
-                 Tables\Actions\ViewAction::make(),
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make()
                 ->successNotification(

@@ -58,14 +58,19 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->navigationGroups([
             NavigationGroup::make()
-                ->label('Blog')
-                ->icon('heroicon-o-pencil')
+                ->label('Projects')
                 ->collapsed(),
 
             NavigationGroup::make()
-                ->label(fn (): string => __('navigation.settings'))
-                ->icon('heroicon-s-cog')
+                // ->label(fn (): string => __('navigation.settings'))
+                ->label('Settings')
+                // ->icon('heroicon-s-cog')
                 ->collapsed(),
+            NavigationGroup::make()
+                ->label('Module Manager')
+                // ->icon('heroicon-o-pencil')
+                ->collapsed(),
+
         ])
         // ->navigationItems([
         //     NavigationItem::make('Developer')

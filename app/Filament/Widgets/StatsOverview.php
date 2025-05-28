@@ -5,6 +5,7 @@ namespace App\Filament\Widgets;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
 use App\Models\Social;
+use Filament\Support\Enums\IconPosition;
 class StatsOverview extends BaseWidget
 {
     protected function getStats(): array
@@ -22,7 +23,21 @@ class StatsOverview extends BaseWidget
             ->description('3% increase')
             ->descriptionIcon('heroicon-m-arrow-trending-up')
             ->color('success'),
-
+        Stat::make('Unique views', '192.1k')
+            ->description('32k increase')
+            ->descriptionIcon('heroicon-m-arrow-trending-up', IconPosition::Before)
+            ->color('success'),
+        Stat::make('Processed', '192.1k')
+            ->color('success')
+            ->extraAttributes([
+                'class' => 'cursor-pointer',
+                'wire:click' => "\$dispatch('setStatusFilter', { filter: 'processed' })",
+            ]),
+        Stat::make('Unique views', '192.1k')
+            ->description('32k increase')
+            ->descriptionIcon('heroicon-m-arrow-trending-up')
+            ->chart([5, 10, 5, 15, 10, 15, 5, 10, 5, 15, 10, 15])
+            ->color('success'),
         ];
     }
 }

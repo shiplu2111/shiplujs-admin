@@ -26,7 +26,7 @@ class EditSetting extends EditRecord
     {
         return  Notification::make()
             ->title('Setting Updated')
-            ->body('The Setting has been successfully Updated.')
+            ->body('The Setting has been successfully Updated 💃💃.')
             ->success()
             ->send();
     }

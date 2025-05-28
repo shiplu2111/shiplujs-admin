@@ -21,10 +21,10 @@ use Filament\Notifications\Notification;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\ToggleColumn;
 use Filament\Forms\Components\ToggleButtons;
+use Illuminate\Support\Facades\Schema;
 class SettingResource extends Resource
 {
     protected static ?string $model = Setting::class;
-
     protected static ?string $navigationIcon = 'heroicon-o-cog';
     public static function getNavigationGroup(): ?string
     {
@@ -108,7 +108,9 @@ class SettingResource extends Resource
     {
         return [
             'index' => Pages\ListSettings::route('/'),
-            'create' => Pages\CreateSetting::route('/create'),
+             ...(Schema::hasTable('email_setups') && Setting::query()->exists() ? [] : [
+                'create' => Pages\CreateSetting::route('/create'),
+            ]),
             'edit' => Pages\EditSetting::route('/{record}/edit'),
         ];
     }

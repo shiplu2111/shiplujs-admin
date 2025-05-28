@@ -22,6 +22,10 @@ use Filament\Notifications\Notification;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\ToggleColumn;
 use Filament\Forms\Components\ToggleButtons;
+use Illuminate\Support\Facades\Schema;
+use Filament\Tables\Actions\Action;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\TestEmail;
 class EmailSetupResource extends Resource
 {
     protected static ?string $model = EmailSetup::class;
@@ -71,6 +75,24 @@ class EmailSetupResource extends Resource
             ->actions([
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
+                Action::make('Send Test Email')
+                ->icon('heroicon-o-paper-airplane')
+                ->requiresConfirmation()
+                ->action(function (EmailSetup $record) {
+                    try {
+                        Mail::to($record->mail_from_address)->send(new TestEmail());
+
+                        Notification::make()
+                            ->title('Test email sent successfully to ' . $record->mail_from_address)
+                            ->success()
+                            ->send();
+                    } catch (\Exception $e) {
+                        Notification::make()
+                            ->title('Failed to send test email: ' . $e->getMessage())
+                            ->danger()
+                            ->send();
+                    }
+                }),
             ])
             ->bulkActions([
                 // Tables\Actions\BulkActionGroup::make([
@@ -90,7 +112,9 @@ class EmailSetupResource extends Resource
     {
         return [
             'index' => Pages\ListEmailSetups::route('/'),
-            'create' => Pages\CreateEmailSetup::route('/create'),
+             ...(Schema::hasTable('email_setups') && EmailSetup::query()->exists() ? [] : [
+                'create' => Pages\CreateEmailSetup::route('/create'),
+            ]),
             'edit' => Pages\EditEmailSetup::route('/{record}/edit'),
         ];
     }
