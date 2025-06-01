@@ -72,6 +72,10 @@ class DatabaseSeeder extends Seeder
             return collect(); // return empty collection to satisfy merge()
         });
         $this->command->info('Module Text Seeder created.');
+        $this->command->question('Login URL: https://example.com/admin/login');
+        $this->command->alert('Email: me@shiplujs.com  &  Password: password');
+        $this->command->line('❤️❤️Thank you for using Shiplujs!❤️❤️');
+
          // ModuleTextSeeder Setup seeder end here
     }
 

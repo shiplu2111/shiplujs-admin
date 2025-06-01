@@ -29,6 +29,7 @@ use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TagsInput;
 use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\Textarea;
 use App\Models\Category;
 class ProjectResource extends Resource
 {
@@ -56,7 +57,13 @@ class ProjectResource extends Resource
                                 $set('slug', Str::slug($state));
                             })
                             ->required(),
-                            TextInput::make('slug')->disabled()->dehydrated()->unique(table: Project::class)->required(),
+                            TextInput::make('slug')
+                            ->disabled()
+                            ->dehydrated()
+                            ->unique(
+                                table: Project::class,
+                                ignorable: fn ($record) => $record
+                            )->required(),
                             TextInput::make('client')->maxLength(255)->required(),
                             TextInput::make('location')->maxLength(255)->required(),
                             DatePicker::make('published_at')->label('Published Date')->required(),
@@ -121,19 +128,22 @@ class ProjectResource extends Resource
                                     ],
                                 ]),
                         ]),
-                        Tabs\Tab::make('SEO')
-                            ->schema([
-                                TextInput::make('meta_title')->maxLength(255),
-                                TextInput::make('meta_description')->maxLength(255),
-                                TextInput::make('meta_keywords')->maxLength(255),
-                                TextInput::make('og_title')->maxLength(255),
-                                Textarea::make('og_description')->maxLength(255),
-                                FileUpload::make('og_image')->image()->directory('seo-images'),
-                                TextInput::make('twitter_title')->maxLength(255),
-                                Textarea::make('twitter_description')->maxLength(255),
-                                FileUpload::make('twitter_image')->image()->directory('seo-images'),
+                        Tabs\Tab::make('SEO')->schema([
+                        \Filament\Forms\Components\Group::make([
+                            TextInput::make('meta_title')->maxLength(255),
+                            TextInput::make('meta_description')->maxLength(255),
+                            TextInput::make('meta_keywords')->maxLength(255),
+                            TextInput::make('og_title')->maxLength(255),
+                            Textarea::make('og_description')->maxLength(255),
+                            FileUpload::make('og_image')->image()->directory('seo-images'),
+                            TextInput::make('twitter_title')->maxLength(255),
+                            Textarea::make('twitter_description')->maxLength(255),
+                            FileUpload::make('twitter_image')->image()->directory('seo-images'),
                         ])
-                            ])->columnSpan(2),
+                        ->columns(2)
+                        ->relationship('seoMetadata'),
+                    ]),
+                    ])->columnSpan(2),
                        ]);
     }
 
@@ -141,18 +151,36 @@ class ProjectResource extends Resource
     {
         return $table
             ->columns([
-                //
+                TextColumn::make('title')->label('Title')->sortable()->searchable(),
+                TextColumn::make('client')->label('Client')->sortable()->searchable(),
+                TextColumn::make('location')->label('Location')->sortable()->searchable(),
+                TextColumn::make('published_at')->label('Published Date')->sortable()->searchable(),
+                ToggleColumn::make('status')->label('Status')->toggleable()->afterStateUpdated(function ($record, $state) {
+                Notification::make()
+                    ->title('Status Updated')
+                    ->body("The status has been " . ($state ? 'enabled' : 'disabled') . " successfully.")
+                    ->success()
+                    ->send();
+            }),
             ])
             ->filters([
                 //
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make()
+                ->successNotification(
+                     Notification::make()
+                    ->title('Project Deleted')
+                    ->body('The Project has been successfully Deleted.')
+                    ->success()
+                ),
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
+                // Tables\Actions\BulkActionGroup::make([
+                //     Tables\Actions\DeleteBulkAction::make(),
+                // ]),
             ]);
     }
 

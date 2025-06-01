@@ -28,6 +28,7 @@ class ModuleSeeder extends Seeder
                 'training'=> true,
                 'social'=> true,
                 'resume_download'=> false,
+                'case_study'=> false,
         ];
 
         // Insert the data into the sites table

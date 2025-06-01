@@ -58,6 +58,9 @@ class ModuleTextSeeder extends Seeder
 
     'social_title' => 'Social Media',
     'social_sub_title' => 'Connect with me and stay updated on various platforms.',
+
+    'casestudy_title' => 'Case Studies',
+    'casestudy_sub_title' => 'A collection of real-world examples of my work.',
 ];
 
 

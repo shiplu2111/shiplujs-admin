@@ -24,5 +24,6 @@ class Module extends Model
        'training',
        'social',
        'resume_download',
+       'case_study',
     ];
 }

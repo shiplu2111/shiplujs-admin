@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('site_name');
             $table->string('logo')->nullable();
+            $table->string('resume')->nullable();
             $table->string('favicon')->nullable();
             $table->string('preloader')->nullable();
             $table->string('email')->nullable();
@@ -27,6 +28,7 @@ return new class extends Migration
             $table->string('postal_code')->nullable();
             $table->string('copyright')->nullable();
             $table->text('map')->nullable();
+
             $table->timestamps();
         });
     }

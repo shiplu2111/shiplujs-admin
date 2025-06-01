@@ -175,6 +175,15 @@ class ModuleResource extends Resource
                     ->default('1'),
                 ]),
 
+                Section::make()
+                ->schema([
+
+                    Radio::make('case_study')->label('Case Study Publication Status')->inline()
+                    ->options(['1' => 'Published','0' => 'Unpublished',])
+                    ->descriptions(['1' => 'Is visible to Frontend ✔️.','0' => 'Is not visible to Frontend ❌.',])
+                    ->default('1'),
+                ]),
+
 
             ]);
     }
@@ -197,6 +206,7 @@ class ModuleResource extends Resource
                 ToggleColumn::make('training')->onIcon('heroicon-o-check-circle')->offIcon('heroicon-o-x-circle')->onColor('success')->offColor('danger'),
                 ToggleColumn::make('social')->onIcon('heroicon-o-check-circle')->offIcon('heroicon-o-x-circle')->onColor('success')->offColor('danger'),
                 ToggleColumn::make('resume_download')->onIcon('heroicon-o-check-circle')->offIcon('heroicon-o-x-circle')->onColor('success')->offColor('danger'),
+                ToggleColumn::make('case_study')->onIcon('heroicon-o-check-circle')->offIcon('heroicon-o-x-circle')->onColor('success')->offColor('danger'),
             ])->paginated(false)
             ->filters([
                 //

@@ -27,6 +27,7 @@ return new class extends Migration
             $table->boolean('training')->default(true);
             $table->boolean('social')->default(true);
             $table->boolean('resume_download')->default(true);
+            $table->boolean('case_study')->default(true);
             $table->timestamps();
         });
     }

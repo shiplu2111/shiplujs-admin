@@ -49,7 +49,13 @@ class CategoryResource extends Resource
                     $set('slug', Str::slug($state));
                 })
                 ->required(),
-                TextInput::make('slug')->disabled()->dehydrated()->unique(table: Category::class)->required(),
+                TextInput::make('slug')
+                            ->disabled()
+                            ->dehydrated()
+                            ->unique(
+                                table: Category::class,
+                                ignorable: fn ($record) => $record
+                            )->required(),
                 FileUpload::make('image')->image()->imageEditor()->columnSpan(2),
                 ToggleButtons::make('status')
                 ->label('Publication Status')
@@ -73,10 +79,16 @@ class CategoryResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('title')->label('Title'),
-                TextColumn::make('slug')->label('Slug'),
-                ImageColumn::make('image')->label('Image'),
-                ToggleColumn::make('status')->label('Status')->toggleable(),
+                TextColumn::make('title')->label('Title')->sortable()->searchable(),
+                TextColumn::make('slug')->label('Slug')->sortable()->searchable(),
+                ImageColumn::make('image')->label('Image')->sortable()->searchable(),
+                ToggleColumn::make('status')->label('Status')->toggleable()->afterStateUpdated(function ($record, $state) {
+                Notification::make()
+                    ->title('Status Updated')
+                    ->body("The status has been " . ($state ? 'enabled' : 'disabled') . " successfully.")
+                    ->success()
+                    ->send();
+            }),
             ])
             ->filters([
 

@@ -14,4 +14,7 @@ class Social extends Model
         'url',
         'status',
     ];
+     protected $casts = [
+        'status' => 'boolean',
+    ];
 }

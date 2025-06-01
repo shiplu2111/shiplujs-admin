@@ -120,6 +120,11 @@ class ModuleTextResource extends Resource
                         TextInput::make('social_title')->required()->maxLength(70)->label(' Title')->required(),
                         TextInput::make('social_sub_title')->required()->label(' Sub-Title')->maxLength(140)->required()->columnSpan(2),
                     ])->columns(3),
+                Section::make('Case Study Section')
+                    ->schema([
+                        TextInput::make('casestudy_title')->required()->maxLength(70)->label(' Title')->required(),
+                        TextInput::make('casestudy_sub_title')->required()->label(' Sub-Title')->maxLength(140)->required()->columnSpan(2),
+                    ])->columns(3),
 
             ]);
     }

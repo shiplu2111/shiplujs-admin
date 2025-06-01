@@ -67,7 +67,6 @@ class SettingResource extends Resource
     {
         return $table
             ->columns([
-                //  TextColumn::make('status')->getStateUsing(fn (Setting $record): string => $record->status == 1 ? 'Active' : 'Inactive')->toggleable()->label('Site Name')->sortable(),
                     TextColumn::make('site_name')->label('Site Name'),
                     TextColumn::make('email')->label('Email'),
                     TextColumn::make('website_url')->label('Website URL'),

@@ -43,6 +43,9 @@ return new class extends Migration
             $table->string('training_sub_title')->nullable();
             $table->string('social_title');
             $table->string('social_sub_title')->nullable();
+            $table->string('casestudy_title');
+            $table->string('casestudy_sub_title')->nullable();
+
             $table->timestamps();
         });
     }

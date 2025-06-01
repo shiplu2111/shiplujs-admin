@@ -39,6 +39,8 @@ class ModuleText extends Model
         'training_sub_title',
         'social_title',
         'social_sub_title',
+        'casestudy_title',
+        'casestudy_sub_title',
     ];
 
 }

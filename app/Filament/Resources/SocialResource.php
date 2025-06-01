@@ -39,7 +39,7 @@ class SocialResource extends Resource
     {
         return $form
             ->schema([
-                TextInput::make('name')->required(),
+                TextInput::make('name')->required()->maxLength(70),
                 TextInput::make('url')->url()->required()->prefixIcon('heroicon-m-globe-alt'),
 
                 TextInput::make('icon')->required()->prefix('react-icons/')->placeholder('FaHouseMedical '),
@@ -67,10 +67,16 @@ class SocialResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('name')->label('Name'),
-                TextColumn::make('url')->label('Url'),
-                TextColumn::make('icon')->label('Icon'),
-                ToggleColumn::make('status')->label('Status'),
+                TextColumn::make('name')->label('Name')->sortable()->searchable(),
+                TextColumn::make('url')->label('Url')->sortable()->searchable(),
+                TextColumn::make('icon')->label('Icon')->sortable()->searchable(),
+                 ToggleColumn::make('status')->label('Status')->toggleable()->afterStateUpdated(function ($record, $state) {
+                Notification::make()
+                    ->title('Publication Status Updated')
+                    ->body("The status has been " . ($state ? 'enabled' : 'disabled') . " successfully.")
+                    ->success()
+                    ->send();
+            }),
             ])
             ->filters([
                 Filter::make('status')->toggle()

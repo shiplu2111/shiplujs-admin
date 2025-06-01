@@ -58,9 +58,20 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->navigationGroups([
             NavigationGroup::make()
+                ->label('About Me')
+                ->collapsed(),
+            NavigationGroup::make()
                 ->label('Projects')
                 ->collapsed(),
 
+            NavigationGroup::make()
+                ->label(fn (): string => __('navigation.services'))
+                ->label('Services')
+                // ->icon('heroicon-s-cog')
+                ->collapsed(),
+            NavigationGroup::make()
+                ->label('Resume')
+                ->collapsed(),
             NavigationGroup::make()
                 // ->label(fn (): string => __('navigation.settings'))
                 ->label('Settings')
