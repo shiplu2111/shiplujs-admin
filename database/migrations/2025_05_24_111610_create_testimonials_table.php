@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('image')->nullable();
             $table->string('company')->nullable();
             $table->string('designation')->nullable();
-            $table->text('testimonial');
+            $table->longText('testimonial');
             $table->foreignId('project_id')
                 ->nullable()
                 ->constrained('projects')

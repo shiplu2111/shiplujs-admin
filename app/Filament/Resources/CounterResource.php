@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\SkillResource\Pages;
-use App\Filament\Resources\SkillResource\RelationManagers;
-use App\Models\Skill;
+use App\Filament\Resources\CounterResource\Pages;
+use App\Filament\Resources\CounterResource\RelationManagers;
+use App\Models\Counter;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -24,12 +24,12 @@ use Filament\Forms\Components\ToggleButtons;
 use Filament\Forms\Components\Placeholder;
 use Illuminate\Support\HtmlString;
 use Filament\Tables\Filters\Filter;
-class SkillResource extends Resource
+class CounterResource extends Resource
 {
-    protected static ?string $model = Skill::class;
+    protected static ?string $model = Counter::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-light-bulb';
-    protected static ?int $navigationSort = 2;
+    protected static ?string $navigationIcon = 'heroicon-o-chart-bar';
+    protected static ?int $navigationSort = 3;
 
     public static function getNavigationGroup(): ?string
         {
@@ -39,27 +39,19 @@ class SkillResource extends Resource
     {
         return $form
             ->schema([
-                TextInput::make('name')
-                ->label('Skill Name')
-                ->placeholder('E.g. Node JS')
+                 TextInput::make('text')
+                ->label('Counter Name')
+                ->placeholder('E.g. Years Of Experience')
                 ->required(),
-                TextInput::make('percentage')
-                ->label('Percentage')
-                ->placeholder('E.g. 100')
-                ->suffix('%')
-                ->minValue(1)
-                ->maxValue(100)
+                TextInput::make('value')
+                ->label('Value')
                 ->numeric()
+                ->minValue(1)
+                ->placeholder('E.g. 10')
                 ->required(),
-                FileUpload::make('image')
-                ->label('Skill Image')
-                ->directory('skills')
-                ->image()
-                ->imageEditor()
-                ->columnSpan(2)
-                ->required(),
-
-
+                 TextInput::make('value_type')
+                ->label('Icon ')
+                ->placeholder('E.g. +'),
                 ToggleButtons::make('status')
                 ->label('Publication Status')
                 ->boolean()
@@ -74,7 +66,7 @@ class SkillResource extends Resource
                     '0' => 'danger',
                 ])
                 ->default('1')
-                ->grouped()
+                ->grouped(),
             ]);
     }
 
@@ -82,15 +74,15 @@ class SkillResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('name')->label('Skill Name')->sortable()->searchable(),
-                TextColumn::make('percentage')->label('Percentage')->sortable()->searchable(),
-                ImageColumn::make('image')->label('Skill Image')->sortable()->searchable(),
+                TextColumn::make('text')->label('Counter Name')->sortable()->searchable(),
+                TextColumn::make('value')->label('Value')->sortable()->searchable(),
+                TextColumn::make('value_type')->label('Icon')->sortable()->searchable(),
                 ToggleColumn::make('status')->label('Status')->toggleable()->afterStateUpdated(function ($record, $state) {
-                Notification::make()
-                    ->title('Publication Status Updated')
-                    ->body("The status has been " . ($state ? 'enabled' : 'disabled') . " successfully.")
-                    ->success()
-                    ->send();
+                    Notification::make()
+                        ->title('Publication Status Updated')
+                        ->body("The status has been " . ($state ? 'enabled' : 'disabled') . " successfully.")
+                        ->success()
+                        ->send();
                 })
             ])
             ->filters([
@@ -102,8 +94,8 @@ class SkillResource extends Resource
                 Tables\Actions\DeleteAction::make()
                 ->successNotification(
                      Notification::make()
-                    ->title('Skill Deleted')
-                    ->body('The Skill has been successfully Deleted.')
+                    ->title('Counter Deleted')
+                    ->body('The Counter has been successfully Deleted.')
                     ->success()
                 ),
             ])
@@ -124,9 +116,9 @@ class SkillResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListSkills::route('/'),
-            'create' => Pages\CreateSkill::route('/create'),
-            'edit' => Pages\EditSkill::route('/{record}/edit'),
+            'index' => Pages\ListCounters::route('/'),
+            'create' => Pages\CreateCounter::route('/create'),
+            'edit' => Pages\EditCounter::route('/{record}/edit'),
         ];
     }
 }

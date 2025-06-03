@@ -19,8 +19,8 @@ return new class extends Migration
             $table->string('currency_symbol')->nullable();
             $table->string('duration')->nullable();
             $table->string('description')->nullable();
-            $table->text('service_include')->nullable();
-            $table->text('service_not_include')->nullable();
+            $table->longText('service_include')->nullable();
+            $table->longText('service_not_include')->nullable();
             $table->boolean('status')->default(true);
             $table->timestamps();
         });

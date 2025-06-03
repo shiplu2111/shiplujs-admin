@@ -15,9 +15,9 @@ return new class extends Migration
               $table->id();
             $table->string('title');
             $table->string('slug')->unique();
-            $table->text('short_description')->nullable();
-            $table->text('description')->nullable();
-            $table->text('related_service')->nullable();
+            $table->longText('short_description')->nullable();
+            $table->longText('description')->nullable();
+            $table->longText('related_service')->nullable();
             $table->string('image')->nullable(); // main image
 
             $table->foreignId('category_id')
@@ -31,7 +31,7 @@ return new class extends Migration
             $table->string('project_image_1')->nullable();
             $table->string('project_image_2')->nullable();
             $table->string('project_image_3')->nullable();
-            $table->text('project_summery')->nullable();
+            $table->longText('project_summery')->nullable();
             $table->json('tags')->nullable();
             $table->boolean('status')->default(true);
             $table->timestamps();

@@ -1,14 +1,16 @@
 <?php
 
-namespace App\Filament\Resources\SkillResource\Pages;
+namespace App\Filament\Resources\CounterResource\Pages;
 
-use App\Filament\Resources\SkillResource;
+use App\Filament\Resources\CounterResource;
 use Filament\Actions;
 use Filament\Resources\Pages\CreateRecord;
 use Filament\Notifications\Notification;
-class CreateSkill extends CreateRecord
+
+class CreateCounter extends CreateRecord
 {
-    protected static string $resource = SkillResource::class;
+    protected static string $resource = CounterResource::class;
+
      protected function getRedirectUrl(): string
     {
         return $this->getResource()::getUrl('index');
@@ -17,7 +19,7 @@ class CreateSkill extends CreateRecord
     {
         Notification::make()
             ->title(' Created 💃💃')
-            ->body('The Skill has been successfully created.')
+            ->body('The Counter has been successfully created.')
             ->success()
             ->send();
     }

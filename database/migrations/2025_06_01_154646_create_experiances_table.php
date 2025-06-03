@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('start_date');
             $table->string('end_date')->nullable();
             $table->string('website_url')->nullable();
-            $table->text('description')->nullable();
+            $table->longText('description')->nullable();
             $table->text('address')->nullable();
             $table->boolean('status')->default(true);
             $table->timestamps();

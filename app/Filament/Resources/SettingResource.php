@@ -53,12 +53,13 @@ class SettingResource extends Resource
                              TextInput::make('postal_code'),
                              TextInput::make('map')->suffixIcon('heroicon-m-map')->prefix('https://maps.google.com/')->url()->columnSpan(2),
                             ])->columns(2),
-                        Tabs\Tab::make('Images')
+                        Tabs\Tab::make('Files ')
                             ->schema([
                                 FileUpload::make('logo')->image()->imageEditor(),
+                                FileUpload::make('resume')->acceptedFileTypes(['application/pdf']),
                                 FileUpload::make('favicon')->image()->imageEditor(),
                                 FileUpload::make('preloader')->image()->imageEditor(),
-                            ])->columns(3),
+                            ])->columns(2),
                     ])->columnSpan(2),
             ]);
     }

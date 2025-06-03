@@ -48,83 +48,275 @@ class ModuleTextResource extends Resource
                 Section::make('About Section')
                     ->schema([
                         TextInput::make('about_title')->required()->label('Title')->maxLength(70)->required(),
+                        TextInput::make('about_keyword')
+                            ->label('Highlight Keyword')
+                            ->maxLength(70)
+                            ->rule(function (callable $get) {
+                                return function ($attribute, $value, $fail) use ($get) {
+                                    $title = $get('about_title');
+
+                                    if (!str_contains($title, $value)) {
+                                        $fail('The highlight keyword must be part of the title.');
+                                    }
+                                };
+                            }),
                         TextInput::make('about_sub_title')->required()->label('Sub-Title')->maxLength(140)->required()->columnSpan(2),
-                    ])->columns(3),
+                    ])->columns(2),
                 Section::make('Service Section')
                     ->schema([
                         TextInput::make('service_title')->required()->maxLength(70)->label(' Title')->required(),
+                        TextInput::make('service_keyword')
+                            ->label('Highlight Keyword')
+                            ->maxLength(70)
+                            ->rule(function (callable $get) {
+                                return function ($attribute, $value, $fail) use ($get) {
+                                    $title = $get('service_title');
+
+                                    if (!str_contains($title, $value)) {
+                                        $fail('The highlight keyword must be part of the title.');
+                                    }
+                                };
+                            }),
                         TextInput::make('service_sub_title')->required()->label(' Sub-Title')->maxLength(140)->required()->columnSpan(2),
-                    ])->columns(3),
+                    ])->columns(2),
                 Section::make('Skill Section')
                     ->schema([
                         TextInput::make('skill_title')->required()->maxLength(70)->label(' Title')->required(),
+                        TextInput::make('skill_keyword')
+                            ->label('Highlight Keyword')
+                            ->maxLength(70)
+                            ->rule(function (callable $get) {
+                                return function ($attribute, $value, $fail) use ($get) {
+                                    $title = $get('skill_title');
+
+                                    if (!str_contains($title, $value)) {
+                                        $fail('The highlight keyword must be part of the title.');
+                                    }
+                                };
+                            }),
                         TextInput::make('skill_sub_title')->required()->label(' Sub-Title')->maxLength(140)->required()->columnSpan(2),
-                    ])->columns(3),
+                    ])->columns(2),
                 Section::make('Portfolio Section')
                     ->schema([
                         TextInput::make('portfolio_title')->required()->maxLength(70)->label(' Title')->required(),
+                        TextInput::make('portfolio_keyword')
+                            ->label('Highlight Keyword')
+                            ->maxLength(70)
+                            ->rule(function (callable $get) {
+                                return function ($attribute, $value, $fail) use ($get) {
+                                    $title = $get('portfolio_title');
+
+                                    if (!str_contains($title, $value)) {
+                                        $fail('The highlight keyword must be part of the title.');
+                                    }
+                                };
+                            }),
                         TextInput::make('portfolio_sub_title')->required()->label(' Sub-Title')->maxLength(140)->required()->columnSpan(2),
-                    ])->columns(3),
+                    ])->columns(2),
                 Section::make('Testimonial Section')
                     ->schema([
                         TextInput::make('testimonial_title')->required()->maxLength(70)->label(' Title')->required(),
+                        TextInput::make('testimonial_keyword')
+                            ->label('Highlight Keyword')
+                            ->maxLength(70)
+                            ->rule(function (callable $get) {
+                                return function ($attribute, $value, $fail) use ($get) {
+                                    $title = $get('testimonial_title');
+
+                                    if (!str_contains($title, $value)) {
+                                        $fail('The highlight keyword must be part of the title.');
+                                    }
+                                };
+                            }),
                         TextInput::make('testimonial_sub_title')->required()->label(' Sub-Title')->maxLength(140)->required()->columnSpan(2),
-                    ])->columns(3),
+                    ])->columns(2),
                 Section::make('Pricing Section')
                     ->schema([
                         TextInput::make('price_title')->required()->maxLength(70)->label(' Title')->required(),
+                        TextInput::make('price_keyword')
+                            ->label('Highlight Keyword')
+                            ->maxLength(70)
+                            ->rule(function (callable $get) {
+                                return function ($attribute, $value, $fail) use ($get) {
+                                    $title = $get('price_title');
+
+                                    if (!str_contains($title, $value)) {
+                                        $fail('The highlight keyword must be part of the title.');
+                                    }
+                                };
+                            }),
                         TextInput::make('price_sub_title')->required()->label(' Sub-Title')->maxLength(140)->required()->columnSpan(2),
-                    ])->columns(3),
+                    ])->columns(2),
                 Section::make('Blog Section')
                     ->schema([
                         TextInput::make('blog_title')->required()->maxLength(70)->label(' Title')->required(),
+                        TextInput::make('blog_keyword')
+                            ->label('Highlight Keyword')
+                            ->maxLength(70)
+                            ->rule(function (callable $get) {
+                                return function ($attribute, $value, $fail) use ($get) {
+                                    $title = $get('blog_title');
+
+                                    if (!str_contains($title, $value)) {
+                                        $fail('The highlight keyword must be part of the title.');
+                                    }
+                                };
+                            }),
                         TextInput::make('blog_sub_title')->required()->label(' Sub-Title')->maxLength(140)->required()->columnSpan(2),
-                    ])->columns(3),
+                    ])->columns(2),
                 Section::make('Contact Us Section')
                     ->schema([
                         TextInput::make('contact_title')->required()->maxLength(70)->label(' Title')->required(),
+                        TextInput::make('contact_keyword')
+                            ->label('Highlight Keyword')
+                            ->maxLength(70)
+                            ->rule(function (callable $get) {
+                                return function ($attribute, $value, $fail) use ($get) {
+                                    $title = $get('contact_title');
+
+                                    if (!str_contains($title, $value)) {
+                                        $fail('The highlight keyword must be part of the title.');
+                                    }
+                                };
+                            }),
                         TextInput::make('contact_sub_title')->required()->label(' Sub-Title')->maxLength(140)->required()->columnSpan(2),
-                    ])->columns(3),
+                    ])->columns(2),
                 Section::make('Client Section')
                     ->schema([
                         TextInput::make('client_title')->required()->maxLength(70)->label(' Title')->required(),
+                        TextInput::make('client_keyword')
+                            ->label('Highlight Keyword')
+                            ->maxLength(70)
+                            ->rule(function (callable $get) {
+                                return function ($attribute, $value, $fail) use ($get) {
+                                    $title = $get('client_title');
+
+                                    if (!str_contains($title, $value)) {
+                                        $fail('The highlight keyword must be part of the title.');
+                                    }
+                                };
+                            }),
                         TextInput::make('client_sub_title')->required()->label(' Sub-Title')->maxLength(140)->required()->columnSpan(2),
-                    ])->columns(3),
+                    ])->columns(2),
                 Section::make('FAQ Section')
                     ->schema([
                         TextInput::make('faq_title')->required()->maxLength(70)->label(' Title')->required(),
+                        TextInput::make('faq_keyword')
+                            ->label('Highlight Keyword')
+                            ->maxLength(70)
+                            ->rule(function (callable $get) {
+                                return function ($attribute, $value, $fail) use ($get) {
+                                    $title = $get('faq_title');
+
+                                    if (!str_contains($title, $value)) {
+                                        $fail('The highlight keyword must be part of the title.');
+                                    }
+                                };
+                            }),
                         TextInput::make('faq_sub_title')->required()->label(' Sub-Title')->maxLength(140)->required()->columnSpan(2),
-                    ])->columns(3),
+                    ])->columns(2),
                 Section::make('Education Section')
                     ->schema([
                         TextInput::make('education_title')->required()->maxLength(70)->label(' Title')->required(),
+                        TextInput::make('education_keyword')
+                            ->label('Highlight Keyword')
+                            ->maxLength(70)
+                            ->rule(function (callable $get) {
+                                return function ($attribute, $value, $fail) use ($get) {
+                                    $title = $get('education_title');
+
+                                    if (!str_contains($title, $value)) {
+                                        $fail('The highlight keyword must be part of the title.');
+                                    }
+                                };
+                            }),
                         TextInput::make('education_sub_title')->required()->label(' Sub-Title')->maxLength(140)->required()->columnSpan(2),
-                    ])->columns(3),
+                    ])->columns(2),
                 Section::make('Experience Section')
                     ->schema([
                         TextInput::make('experience_title')->required()->maxLength(70)->label(' Title')->required(),
+                        TextInput::make('experience_keyword')
+                            ->label('Highlight Keyword')
+                            ->maxLength(70)
+                            ->rule(function (callable $get) {
+                                return function ($attribute, $value, $fail) use ($get) {
+                                    $title = $get('experience_title');
+
+                                    if (!str_contains($title, $value)) {
+                                        $fail('The highlight keyword must be part of the title.');
+                                    }
+                                };
+                            }),
                         TextInput::make('experience_sub_title')->required()->label(' Sub-Title')->maxLength(140)->required()->columnSpan(2),
-                    ])->columns(3),
+                    ])->columns(2),
                 Section::make('Certificate Section')
                     ->schema([
                         TextInput::make('certificate_title')->required()->maxLength(70)->label(' Title')->required(),
+                        TextInput::make('certificate_keyword')
+                            ->label('Highlight Keyword')
+                            ->maxLength(70)
+                            ->rule(function (callable $get) {
+                                return function ($attribute, $value, $fail) use ($get) {
+                                    $title = $get('certificate_title');
+
+                                    if (!str_contains($title, $value)) {
+                                        $fail('The highlight keyword must be part of the title.');
+                                    }
+                                };
+                            }),
                         TextInput::make('certificate_sub_title')->required()->label(' Sub-Title')->maxLength(140)->required()->columnSpan(2),
-                    ])->columns(3),
+                    ])->columns(2),
                 Section::make('Training Section')
                     ->schema([
                         TextInput::make('training_title')->required()->maxLength(70)->label(' Title')->required(),
+                        TextInput::make('training_keyword')
+                            ->label('Highlight Keyword')
+                            ->maxLength(70)
+                            ->rule(function (callable $get) {
+                                return function ($attribute, $value, $fail) use ($get) {
+                                    $title = $get('training_title');
+
+                                    if (!str_contains($title, $value)) {
+                                        $fail('The highlight keyword must be part of the title.');
+                                    }
+                                };
+                            }),
                         TextInput::make('training_sub_title')->required()->label(' Sub-Title')->maxLength(140)->required()->columnSpan(2),
-                    ])->columns(3),
+                    ])->columns(2),
                 Section::make('Social Section')
                     ->schema([
                         TextInput::make('social_title')->required()->maxLength(70)->label(' Title')->required(),
+                        TextInput::make('social_keyword')
+                            ->label('Highlight Keyword')
+                            ->maxLength(70)
+                            ->rule(function (callable $get) {
+                                return function ($attribute, $value, $fail) use ($get) {
+                                    $title = $get('social_title');
+
+                                    if (!str_contains($title, $value)) {
+                                        $fail('The highlight keyword must be part of the title.');
+                                    }
+                                };
+                            }),
                         TextInput::make('social_sub_title')->required()->label(' Sub-Title')->maxLength(140)->required()->columnSpan(2),
-                    ])->columns(3),
+                    ])->columns(2),
                 Section::make('Case Study Section')
                     ->schema([
                         TextInput::make('casestudy_title')->required()->maxLength(70)->label(' Title')->required(),
+                        TextInput::make('casestudy_keyword')
+                            ->label('Highlight Keyword')
+                            ->maxLength(70)
+                            ->rule(function (callable $get) {
+                                return function ($attribute, $value, $fail) use ($get) {
+                                    $title = $get('casestudy_title');
+
+                                    if (!str_contains($title, $value)) {
+                                        $fail('The highlight keyword must be part of the title.');
+                                    }
+                                };
+                            }),
                         TextInput::make('casestudy_sub_title')->required()->label(' Sub-Title')->maxLength(140)->required()->columnSpan(2),
-                    ])->columns(3),
+                    ])->columns(2),
 
             ]);
     }

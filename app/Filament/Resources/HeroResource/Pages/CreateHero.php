@@ -1,14 +1,17 @@
 <?php
 
-namespace App\Filament\Resources\SkillResource\Pages;
+namespace App\Filament\Resources\HeroResource\Pages;
 
-use App\Filament\Resources\SkillResource;
+use App\Filament\Resources\HeroResource;
 use Filament\Actions;
 use Filament\Resources\Pages\CreateRecord;
 use Filament\Notifications\Notification;
-class CreateSkill extends CreateRecord
+
+class CreateHero extends CreateRecord
 {
-    protected static string $resource = SkillResource::class;
+    protected static string $resource = HeroResource::class;
+
+    protected static bool $canCreateAnother = false;
      protected function getRedirectUrl(): string
     {
         return $this->getResource()::getUrl('index');
@@ -16,8 +19,8 @@ class CreateSkill extends CreateRecord
     protected function afterCreate(): void
     {
         Notification::make()
-            ->title(' Created 💃💃')
-            ->body('The Skill has been successfully created.')
+            ->title('Hero Created')
+            ->body('The Hero has been successfully created.')
             ->success()
             ->send();
     }

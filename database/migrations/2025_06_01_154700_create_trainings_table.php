@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('institute')->nullable();
             $table->string('start_date')->nullable();
             $table->string('end_date')->nullable();
-            $table->text('description')->nullable();
+            $table->longText('description')->nullable();
             $table->string('website_url')->nullable();
             $table->boolean('status')->default(true);
             $table->timestamps();

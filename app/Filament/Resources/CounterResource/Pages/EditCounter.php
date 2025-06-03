@@ -1,23 +1,24 @@
 <?php
 
-namespace App\Filament\Resources\SkillResource\Pages;
+namespace App\Filament\Resources\CounterResource\Pages;
 
-use App\Filament\Resources\SkillResource;
+use App\Filament\Resources\CounterResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
 use Filament\Notifications\Notification;
-class EditSkill extends EditRecord
-{
-    protected static string $resource = SkillResource::class;
 
-   protected function getHeaderActions(): array
+class EditCounter extends EditRecord
+{
+    protected static string $resource = CounterResource::class;
+
+    protected function getHeaderActions(): array
     {
         return [
             Actions\DeleteAction::make()
             ->successNotification(
                      Notification::make()
                     ->title('Deleted 😒😒')
-                    ->body('The Skill has been successfully Deleted.')
+                    ->body('The Counter has been successfully Deleted.')
                     ->success()
                 ),
         ];
@@ -31,7 +32,7 @@ class EditSkill extends EditRecord
     {
         return  Notification::make()
             ->title(' Updated 💃💃')
-            ->body('The Skill has been successfully Updated.')
+            ->body('The Counter has been successfully Updated.')
             ->success()
             ->send();
     }
