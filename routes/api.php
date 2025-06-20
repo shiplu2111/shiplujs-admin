@@ -26,6 +26,42 @@ use App\Http\Controllers\ContactController;
 // });
 
 
-Route::get('/categories', [PostController::class, 'categories']);
 
 Route::post('/contact-me', [ContactController::class, 'index']);
+Route::post('/subscribe', [ContactController::class, 'subscribe']);
+
+
+// project routes
+Route::get('/categories', [ProjectController::class, 'categories']);
+Route::get('/projects', [ProjectController::class, 'index']);
+Route::get('/project-details/{slug}', [ProjectController::class, 'projectDetails']);
+Route::get('/project-by-category/{categoryId}', [ProjectController::class, 'projectByCategory']);
+Route::get('/project-by-tag/{tag}', [ProjectController::class, 'projectByTag']);
+Route::get('/project-by-client/{client}', [ProjectController::class, 'projectByClient']);
+Route::get('/project-by-location/{location}', [ProjectController::class, 'projectByLocation']);
+Route::get('/testimonials', [ProjectController::class, 'testimonials']);
+Route::get('/testimonials/{projectId}', [ProjectController::class, 'testimonialByProject']);
+
+
+// service routes
+Route::get('/services', [ServiceController::class, 'index']);
+Route::get('/packages', [ServiceController::class, 'pricingPlans']);
+Route::get('/clients', [ServiceController::class, 'clients']);
+Route::get('/faqs', [ServiceController::class, 'faqs']);
+
+// resume routes
+Route::get('/experiences', [ResumeController::class, 'experiences']);
+Route::get('/education', [ResumeController::class, 'education']);
+Route::get('/trainings', [ResumeController::class, 'trainings']);
+Route::get('/certificates', [ResumeController::class, 'certificates']);
+Route::get('/case-studies', [ResumeController::class, 'caseStudies']);
+
+
+// about routes
+
+//setting routes
+Route::get('/settings', [SettingController::class, 'index']);
+Route::get('/socials', [SettingController::class, 'socials']);
+Route::get('/modules', [SettingController::class, 'modules']);
+Route::get('/module-texts', [SettingController::class, 'moduleTexts']);
+

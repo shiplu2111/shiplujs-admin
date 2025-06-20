@@ -13,7 +13,7 @@ class ListPackages extends ListRecords
 
      protected function getHeaderActions(): array
     {
-        if (Package::count() === 1) {
+        if (Package::count() === 3) {
             return []; // hide the Create button
         }
         return [

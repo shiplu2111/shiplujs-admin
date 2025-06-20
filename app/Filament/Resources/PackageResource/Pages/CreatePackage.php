@@ -13,6 +13,7 @@ class CreatePackage extends CreateRecord
     {
         return $this->getResource()::getUrl('index');
     }
+protected static bool $canCreateAnother = false;
     protected function afterCreate(): void
     {
         Notification::make()

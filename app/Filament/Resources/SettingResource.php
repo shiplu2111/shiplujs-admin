@@ -51,7 +51,7 @@ class SettingResource extends Resource
                              TextInput::make('district'),
                              TextInput::make('country'),
                              TextInput::make('postal_code'),
-                             TextInput::make('map')->suffixIcon('heroicon-m-map')->prefix('https://maps.google.com/')->url()->columnSpan(2),
+                             TextInput::make('map')->suffixIcon('heroicon-m-map')->prefix('Embed a map')->columnSpan(2),
                             ])->columns(2),
                         Tabs\Tab::make('Files ')
                             ->schema([

@@ -32,8 +32,7 @@ class ContactController extends Controller
             // $contact = ContactMessage::create($validated);
             return response()->json([
                 'success' => true,
-                'message' => 'Thank you for your message!',
-                'data' => $contact,
+                'message' => 'Thank you for your query and we will get back to you!',
             ], 201);}
              catch (\Exception $e) {
                 // Log the error
@@ -47,5 +46,30 @@ class ContactController extends Controller
                 ], 500);
             }
 
+    }
+
+    public function subscribe(Request $request)
+    {
+        $validated = $request->validate([
+            'email' => 'required|email|max:255',
+        ]);
+
+        try {
+            // এখানে সাবস্ক্রিপশন লজিক যোগ করুন
+            // যেমন, ইমেইল ডাটাবেজে সংরক্ষণ করা
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Thank you for subscribing!',
+            ], 200);
+        } catch (\Exception $e) {
+            Log::error('Subscription Error: '.$e->getMessage());
+
+            return response()->json([
+                'success' => false,
+                'message' => 'Something went wrong. Please try again later!',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
     }
 }
