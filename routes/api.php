@@ -59,6 +59,13 @@ Route::get('/case-studies', [ResumeController::class, 'caseStudies']);
 
 // about routes
 
+Route::get('/hero', [AboutController::class, 'hero']);
+Route::get('/skills', [AboutController::class, 'skills']);
+Route::get('/counters', [AboutController::class, 'counters']);
+// Route::get('/achievements', [AboutController::class, 'achievements']);
+// Route::get('/languages', [AboutController::class, 'languages']);
+// Route::get('/hobbies', [AboutController::class, 'hobbies']);
+
 //setting routes
 Route::get('/settings', [SettingController::class, 'index']);
 Route::get('/socials', [SettingController::class, 'socials']);
