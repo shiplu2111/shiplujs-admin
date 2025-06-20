@@ -34,7 +34,7 @@ class ServiceResource extends Resource
 {
     protected static ?string $model = Service::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-cog';
+    protected static ?string $navigationIcon = 'heroicon-o-server';
     public static function getNavigationGroup(): ?string
     {
         return 'Services'; // Match this to a group from navigationGroups()

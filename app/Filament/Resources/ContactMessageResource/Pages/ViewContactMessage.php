@@ -21,13 +21,13 @@ class ViewContactMessage extends ViewRecord
 {
     protected static string $resource = ContactMessageResource::class;
 
-        protected function handleRecordUpdate(Model $record, array $data): Model
-        {
-            $record->update($record->is_read ? ['is_read' => true] : ['is_read' => true]);
-
-            return $record;
-        }
-
+    protected function mutateFormDataBeforeFill(array $data): array
+    {
+        $record_data = ContactMessage::find($data['id']);
+        $record_data['is_read'] = true;
+        $record_data->save();
+        return $data;
+    }
     protected function getHeaderActions(): array
     {
     return [
