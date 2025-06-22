@@ -9,8 +9,9 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Panel;
-
-class User extends Authenticatable implements FilamentUser
+use Filament\Models\Contracts\HasAvatar;
+use Illuminate\Support\Facades\Storage;
+class User extends Authenticatable implements FilamentUser, HasAvatar
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -19,10 +20,16 @@ class User extends Authenticatable implements FilamentUser
      *
      * @var array<int, string>
      */
+        public function getFilamentAvatarUrl(): ?string
+    {
+        $avatarColumn = config('filament-edit-profile.avatar_column', 'avatar_url');
+        return $this->$avatarColumn ? Storage::url($this->$avatarColumn) : null;
+    }
     protected $fillable = [
         'name',
         'email',
         'password',
+        'avatar_url',
     ];
 
     /**
