@@ -2,8 +2,8 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\CategoryResource\Pages;
-use App\Filament\Resources\CategoryResource\RelationManagers;
+use App\Filament\Resources\ProjectCategoryResource\Pages;
+use App\Filament\Resources\ProjectCategoryResource\RelationManagers;
 use App\Models\Category;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -26,7 +26,7 @@ use Illuminate\Support\HtmlString;
 use Filament\Tables\Filters\Filter;
 use Illuminate\Support\Str;
 use App\Models\Project;
-class CategoryResource extends Resource
+class ProjectCategoryResource extends Resource
 {
     protected static ?string $model = Category::class;
 

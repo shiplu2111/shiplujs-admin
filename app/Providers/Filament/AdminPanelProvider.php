@@ -22,6 +22,7 @@ use Filament\Navigation\NavigationItem;
 use Joaopaulolndev\FilamentEditProfile\FilamentEditProfilePlugin;
 use Filament\Navigation\MenuItem;
 use Joaopaulolndev\FilamentEditProfile\Pages\EditProfilePage;
+use Firefly\FilamentBlog\Blog;
 class AdminPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
@@ -55,7 +56,8 @@ class AdminPanelProvider extends PanelProvider
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
             ])
-             ->plugins([
+            ->plugins([
+                Blog::make(),
                 FilamentEditProfilePlugin::make()
                     ->slug('my-profile')
                     ->setTitle('My Profile')

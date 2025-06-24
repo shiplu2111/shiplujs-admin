@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Filament\Resources\CategoryResource\Pages;
+namespace App\Filament\Resources\ProjectCategoryResource\Pages;
 
-use App\Filament\Resources\CategoryResource;
+use App\Filament\Resources\ProjectCategoryResource;
 use Filament\Actions;
 use Filament\Resources\Pages\CreateRecord;
 use Filament\Notifications\Notification;
 class CreateCategory extends CreateRecord
 {
-    protected static string $resource = CategoryResource::class;
+    protected static string $resource = ProjectCategoryResource::class;
      protected function getRedirectUrl(): string
     {
         return $this->getResource()::getUrl('index');

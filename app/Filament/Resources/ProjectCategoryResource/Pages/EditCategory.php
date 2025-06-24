@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Filament\Resources\CategoryResource\Pages;
+namespace App\Filament\Resources\ProjectCategoryResource\Pages;
 
-use App\Filament\Resources\CategoryResource;
+use App\Filament\Resources\ProjectCategoryResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
 use Filament\Notifications\Notification;
 class EditCategory extends EditRecord
 {
-    protected static string $resource = CategoryResource::class;
+    protected static string $resource = ProjectCategoryResource::class;
 
       protected function getHeaderActions(): array
     {
