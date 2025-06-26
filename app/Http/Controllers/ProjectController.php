@@ -9,7 +9,13 @@ use App\Models\Testimonial;
 use Illuminate\Support\Facades\DB;
 class ProjectController extends Controller
 {
-
+    private function transformSettings($image)
+        {
+            if (!empty($image)) {
+                return asset('storage/' . ltrim($image, '/'));
+            }
+            return null;
+        }
     private function transformProjects($projects)
         {
             return $projects->map(function ($project) {
@@ -118,10 +124,14 @@ class ProjectController extends Controller
     {
         $testimonials = Testimonial::all()->where('status', true);
 
+
         // Map over testimonials to attach project names
         $testimonials = $testimonials->map(function ($testimonial) {
             $project = Project::where('id', $testimonial->project_id)->first();
             $testimonial->project_name = $project ? $project->title : null;
+            if($testimonial->image !==null){
+                $testimonial->image = $this->transformSettings($testimonial->image);
+            }
             return $testimonial;
         });
 
@@ -204,6 +214,13 @@ class ProjectController extends Controller
                 'success' => false,
                 'message' => 'No testimonials found for this project',
             ], 404);
+        }
+        foreach ($testimonials as $testimonial) {
+            if ($testimonial->image !== null) {
+                if($testimonial->image !==null){
+                $testimonial->image = $this->transformSettings($testimonial->image);
+            }
+            }
         }
         return response()->json([
             'success' => true,
