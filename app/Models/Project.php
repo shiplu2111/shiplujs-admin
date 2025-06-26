@@ -26,13 +26,15 @@ class Project extends Model
         'project_image_3',
         'project_summery',
         'tags',
-        'status'
+        'status',
+        'is_featured'
     ];
 
      protected $casts = [
         'tags' => 'array',
         'related_service' => 'array',
-        'status' => 'boolean'
+        'status' => 'boolean',
+        'is_featured' => 'boolean'
     ];
 
      public function categories()

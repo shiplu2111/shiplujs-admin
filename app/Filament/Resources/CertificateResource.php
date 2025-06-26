@@ -49,6 +49,7 @@ class CertificateResource extends Resource
 
                 Select::make('passing_year')
                 ->label('Passing Year')
+                ->required()
                 ->options(
                     collect(range(now()->year, now()->subYears(50)->year))->mapWithKeys(fn ($year) => [$year => $year])
                 )
@@ -58,7 +59,7 @@ class CertificateResource extends Resource
                 ->columnSpan(2)
                 ->placeholder('E.g. Dhaka, Bangladesh')
                 ->required(),
-                FileUpload::make('certificate_image')->image()->directory('certificates')->imageEditor(),
+                FileUpload::make('certificate_image')->required()->image()->directory('certificates')->imageEditor(),
                 ToggleButtons::make('status')
                 ->label('Publication Status')
                 ->boolean()

@@ -35,6 +35,7 @@ Route::post('/subscribe', [ContactController::class, 'subscribe']);
 // project routes
 Route::get('/categories', [ProjectController::class, 'categories']);
 Route::get('/projects', [ProjectController::class, 'index']);
+Route::get('/projects/latest', [ProjectController::class, 'latestProjects']);
 Route::get('/project-details/{slug}', [ProjectController::class, 'projectDetails']);
 Route::get('/project-by-category/{categoryId}', [ProjectController::class, 'projectByCategory']);
 Route::get('/project-by-tag/{tag}', [ProjectController::class, 'projectByTag']);

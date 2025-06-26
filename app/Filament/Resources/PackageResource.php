@@ -83,8 +83,7 @@ class PackageResource extends Resource
                                     Hidden::make('id')
                                     ->default(fn () => (string) Str::uuid()),
                                     TextInput::make('service')
-                                        ->label('Service Name')
-                                        ->required(),
+                                        ->label('Service Name'),
                                 ])
                                 ->columnSpan('full')
                                 ->label('Service Names')

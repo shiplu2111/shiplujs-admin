@@ -86,7 +86,7 @@ class CaseStudyResource extends Resource
                             ->columnSpan('full')->required(),
                 RichEditor::make('results')
                             ->columnSpan('full')->required(),
-                FileUpload::make('cover_image')
+                FileUpload::make('cover_image')->required()
                             ->image()->directory('case_studies')->imageEditor(),
                 TextInput::make('project_url')
                             ->url()->prefixIcon('heroicon-m-globe-alt'),

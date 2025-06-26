@@ -56,7 +56,7 @@ class ProjectCategoryResource extends Resource
                                 table: Category::class,
                                 ignorable: fn ($record) => $record
                             )->required(),
-                FileUpload::make('image')->image()->imageEditor()->columnSpan(2),
+                FileUpload::make('image')->image()->imageEditor()->columnSpan(2)->required(),
                 ToggleButtons::make('status')
                 ->label('Publication Status')
                 ->boolean()

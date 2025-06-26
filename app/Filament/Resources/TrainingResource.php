@@ -53,18 +53,33 @@ class TrainingResource extends Resource
 
                 Select::make('start_date')
                 ->label('Start Year')
+                ->required()
                 ->options(
-                    collect(range(now()->year, now()->subYears(50)->year))->mapWithKeys(fn ($year) => [$year => $year])
-                )
-                ->searchable(),
-
-               Select::make('end_date')
-                ->label('End Year')
-                ->options(
-                    collect(['Present' => 'Present'] + range(now()->year, now()->subYears(50)->year))
+                    collect(range(now()->year, now()->subYears(50)->year))
                         ->mapWithKeys(fn ($year) => [$year => $year])
                 )
+                ->reactive()
                 ->searchable(),
+
+                Select::make('end_date')
+                ->label('End Year')
+                ->required()
+                ->options(function (callable $get) {
+                    $startYear = $get('start_date');
+
+                    $years = range(now()->year, now()->subYears(50)->year);
+
+                    $filteredYears = collect($years)
+                        ->filter(fn ($year) => $startYear ? $year >= $startYear : true)
+                        ->mapWithKeys(fn ($year) => [(string)$year => (string)$year]);
+
+                    return collect(['Present' => 'Present'])->union($filteredYears); // ✅ use union
+                })
+                ->disabled(fn (callable $get) => !$get('start_date'))
+                ->searchable()
+                ->reactive()
+                ->suffixIcon('heroicon-o-calendar')
+                ->live(),
                 TextInput::make('website_url')
                 ->label('Website URL')
                 ->placeholder('E.g. Sara Innovations')

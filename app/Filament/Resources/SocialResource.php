@@ -42,9 +42,9 @@ class SocialResource extends Resource
                 TextInput::make('name')->required()->maxLength(70),
                 TextInput::make('url')->url()->required()->prefixIcon('heroicon-m-globe-alt'),
 
-                TextInput::make('icon')->required()->prefix('react-icons/')->placeholder('FaHouseMedical '),
-                 Placeholder::make('React Icons Fa6')
-                    ->content(new HtmlString('<a target="_blank" class="underline" href="https://react-icons.github.io/react-icons/icons/fa6/">Click Here For Icons</a>')),
+                TextInput::make('icon')->required()->placeholder('fab fa-facebook-f '),
+                 Placeholder::make('Fontawesome Icons v5 Link only fab icons')
+                    ->content(new HtmlString('<a target="_blank" class="underline" href="https://fontawesome.com/v5/search?ic=free">Click Here For Icons</a>')),
                 ToggleButtons::make('status')
                 ->label('Publication Status')
                 ->boolean()

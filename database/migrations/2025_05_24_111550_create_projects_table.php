@@ -34,6 +34,7 @@ return new class extends Migration
             $table->longText('project_summery')->nullable();
             $table->json('tags')->nullable();
             $table->boolean('status')->default(true);
+            $table->boolean('is_featured')->default(false);
             $table->timestamps();
         });
     }

@@ -62,7 +62,7 @@ class ServiceResource extends Resource
                             )->required(),
                 Textarea::make('sub_title')->required()->columnSpan(2),
                 RichEditor::make('description')->required()->columnSpan(2),
-                FileUpload::make('image')->image()->directory('services')->imageEditor()->columnSpan(2),
+                FileUpload::make('image')->required()->image()->directory('services')->imageEditor()->columnSpan(2),
                 Fieldset::make('Related Services')
                 ->schema([
                 Repeater::make('related_service')
@@ -75,6 +75,7 @@ class ServiceResource extends Resource
                                 ])
                                 ->columnSpan('full')
                                 ->label('Related Services')
+                                ->required()
                                 ->addActionLabel('Add Related Service')
                                 ->default([
                                     [

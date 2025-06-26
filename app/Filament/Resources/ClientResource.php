@@ -40,7 +40,7 @@ class ClientResource extends Resource
         return $form
             ->schema([
                 TextInput::make('name')->required()->maxLength(70)->columnSpan(2),
-                FileUpload::make('image')->image()->directory('clients')->imageEditor()->columnSpan(2),
+                FileUpload::make('image')->required()->image()->directory('clients')->imageEditor()->columnSpan(2),
                 ToggleButtons::make('status')
                 ->label('Publication Status')
                 ->boolean()

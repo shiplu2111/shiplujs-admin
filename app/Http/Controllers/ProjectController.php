@@ -61,6 +61,20 @@ class ProjectController extends Controller
             'data' => $projects,
         ]);
     }
+    public function latestProjects()
+        {
+            $projects = Project::where('status', true)
+            ->where('is_featured', true)
+            ->limit(4)
+            ->get();
+            $projects = $this->transformProjects($projects);
+            return response()->json([
+                'success' => true,
+                'message' => 'Latest Projects fetched successfully',
+                'data' => $projects,
+            ]);
+        }
+
 
     public function projectDetails($slug)
     {

@@ -62,7 +62,7 @@ class SettingController extends Controller
 
     public function modules() {
         try {
-            $modules = ModuleText::first();
+            $modules = Module::first();
             return response()->json([
                 'success' => true,
                 'message' => 'Modules fetched successfully',

@@ -2,8 +2,8 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\SettingResource\Pages;
-use App\Filament\Resources\SettingResource\RelationManagers;
+use App\Filament\Resources\WebSettingResource\Pages;
+use App\Filament\Resources\WebSettingResource\RelationManagers;
 use App\Models\Setting;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -22,7 +22,7 @@ use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\ToggleColumn;
 use Filament\Forms\Components\ToggleButtons;
 use Illuminate\Support\Facades\Schema;
-class SettingResource extends Resource
+class WebSettingResource extends Resource
 {
     protected static ?string $model = Setting::class;
     protected static ?string $navigationIcon = 'heroicon-o-cog';

@@ -51,7 +51,7 @@ class TestimonialResource extends Resource
                                 ->options(Project::pluck('title','id')->toArray())
                                 ->searchable()
                                 ->required(),
-                FileUpload::make('image')->image()->imageEditor()->columnSpan(2),
+                FileUpload::make('image')->image()->imageEditor()->columnSpan(2)->required(),
                 Textarea::make('testimonial')->required()->columnSpan(2),
 
                 ToggleButtons::make('status')

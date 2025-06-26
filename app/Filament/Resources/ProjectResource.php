@@ -82,6 +82,22 @@ class ProjectResource extends Resource
                                 '0' => 'danger',
                             ])
                             ->default('1')
+                            ->grouped(),
+
+                            ToggleButtons::make('is_featured')
+                            ->label('Featured ?')
+                            ->boolean()
+                            ->inline()
+                            ->options([
+                                '1' => 'Featured',
+                                '0' => 'Not Featured',
+                            ])
+                            ->required()
+                            ->colors([
+                                '1' => 'info',
+                                '0' => 'danger',
+                            ])
+                            ->default('0')
                             ->grouped()
                         ])->columns(2),
                         Tabs\Tab::make('Description')
@@ -130,15 +146,15 @@ class ProjectResource extends Resource
                         ]),
                         Tabs\Tab::make('SEO')->schema([
                         \Filament\Forms\Components\Group::make([
-                            TextInput::make('meta_title')->maxLength(255),
-                            TextInput::make('meta_description')->maxLength(255),
-                            TextInput::make('meta_keywords')->maxLength(255),
-                            TextInput::make('og_title')->maxLength(255),
-                            Textarea::make('og_description')->maxLength(255),
-                            FileUpload::make('og_image')->image()->directory('seo-images'),
-                            TextInput::make('twitter_title')->maxLength(255),
-                            Textarea::make('twitter_description')->maxLength(255),
-                            FileUpload::make('twitter_image')->image()->directory('seo-images'),
+                            TextInput::make('meta_title')->maxLength(255)->required(),
+                            TextInput::make('meta_description')->maxLength(255)->required(),
+                            TextInput::make('meta_keywords')->maxLength(255)->required(),
+                            TextInput::make('og_title')->maxLength(255)->required(),
+                            Textarea::make('og_description')->maxLength(255)->required(),
+                            FileUpload::make('og_image')->image()->directory('seo-images')->required(),
+                            TextInput::make('twitter_title')->maxLength(255)->required(),
+                            Textarea::make('twitter_description')->maxLength(255)->required(),
+                            FileUpload::make('twitter_image')->image()->directory('seo-images')->required(),
                         ])
                         ->columns(2)
                         ->relationship('seoMetadata'),
@@ -162,6 +178,14 @@ class ProjectResource extends Resource
                     ->success()
                     ->send();
             }),
+            ToggleColumn::make('is_featured')->label('Featured')->toggleable()->afterStateUpdated(function ($record, $state) {
+                 Notification::make()
+                     ->title('Featured Status Updated')
+                     ->body("The Project has been updated to " . ($state ? 'featured' : 'not featured') . " successfully.")
+                     ->success()
+                     ->send();
+                 })->sortable()->searchable(),
+
             ])
             ->filters([
                 //

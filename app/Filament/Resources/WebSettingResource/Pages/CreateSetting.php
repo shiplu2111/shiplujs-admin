@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Filament\Resources\SettingResource\Pages;
+namespace App\Filament\Resources\WebSettingResource\Pages;
 
-use App\Filament\Resources\SettingResource;
+use App\Filament\Resources\WebSettingResource;
 use Filament\Actions;
 use Filament\Resources\Pages\CreateRecord;
 use Filament\Notifications\Notification;
 class CreateSetting extends CreateRecord
 {
-    protected static string $resource = SettingResource::class;
+    protected static string $resource = WebSettingResource::class;
     protected static bool $canCreateAnother = false;
      protected function getRedirectUrl(): string
     {
