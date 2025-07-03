@@ -14,10 +14,8 @@ class BlogController extends Controller
         return null;
     }
 
-    public function index()
-    {
-        try {
-            $posts = DB::table('fblog_posts as p')
+    private function mainQuery(){
+        return DB::table('fblog_posts as p')
     ->leftJoin('fblog_category_fblog_post as cp', 'cp.post_id', '=', 'p.id')
     ->leftJoin('fblog_categories as c', 'c.id', '=', 'cp.category_id')
     ->leftJoin('fblog_post_fblog_tag as pt', 'pt.post_id', '=', 'p.id')
@@ -37,8 +35,14 @@ class BlogController extends Controller
         DB::raw("CONCAT('[', GROUP_CONCAT(DISTINCT 
             JSON_OBJECT('id', t.id, 'name', t.name)
         ), ']') AS tags")
-    )
-    ->where('p.status', '=', 'published')
+    );
+    }
+
+    public function index()
+    {
+        try {
+            
+    $posts = $this->mainQuery()->where('p.status', '=', 'published')
     ->groupBy('p.id',
         'p.title',
         'p.slug',
@@ -55,10 +59,6 @@ class BlogController extends Controller
         return $post;
     });
 
-
-
-
-            
             if ($posts->isEmpty()) {
                 return response()->json(['message' => 'No blog posts found'], 404);
             }
@@ -138,9 +138,25 @@ if ($post) {
         return response()->json($post);
     }
 
-    public function latestPosts()
+    public function latest()
     {
-        $posts = DB::table('fblog_posts')->orderBy('created_at', 'desc')->take(5)->get();
+        dd('ok');
+        $posts = $this->mainQuery()->where('p.status','published')->orderBy('created_at', 'desc')->groupBy('p.id',
+        'p.title',
+        'p.slug',
+        'p.sub_title',
+        'p.cover_photo_path',
+        'p.photo_alt_text',
+        'p.status',
+        'p.published_at'
+        )
+        ->take(5)->get()
+    ->map(function ($post) {
+        $post->categories = json_decode($post->categories, true) ?? [];
+        $post->tags = json_decode($post->tags, true) ?? [];
+        return $post;
+    });
+
         return response()->json($posts);
     }
 }
