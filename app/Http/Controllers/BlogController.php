@@ -80,55 +80,62 @@ class BlogController extends Controller
     }
 
 
-    public function show($id)
+    public function show($slug)
     {
-        $posts = DB::table('fblog_posts as p')
-        ->leftJoin('fblog_category_fblog_post as cp', 'cp.post_id', '=', 'p.id')
-        ->leftJoin('fblog_categories as c', 'c.id', '=', 'cp.category_id')
-        ->leftJoin('fblog_post_fblog_tag as pt', 'pt.post_id', '=', 'p.id')
-        ->leftJoin('fblog_tags as t', 't.id', '=', 'pt.tag_id')
-        ->leftJoin('users as u', 'u.id', '=', 'p.user_id')
-        ->select(
-            'p.id',
-            'p.title',
-            'p.slug',
-            'p.sub_title',
-            'p.body',
-            'p.cover_photo_path',
-            'p.photo_alt_text',
-            'p.status',
-            'p.published_at',
-            'u.name as user_name',
-            'u.is as user_id',
-            DB::raw("CONCAT('[', GROUP_CONCAT(DISTINCT 
-                JSON_OBJECT('id', c.id, 'name', c.name)
-            ), ']') AS categories"),
-            DB::raw("CONCAT('[', GROUP_CONCAT(DISTINCT 
-                JSON_OBJECT('id', t.id, 'name', t.name)
-            ), ']') AS tags")
-        )
-        ->where('p.id', '=', $id)        
-        ->groupBy('p.id',
-            'p.title',
-            'p.slug',
-            'p.sub_title',
-            'p.cover_photo_path',
-            'p.photo_alt_text',
-            'p.status',
-            'p.published_at',
-            'p.body'
-            )
-        ->get()
-        ->map(function ($post) {
-            $post->categories = json_decode($post->categories, true) ?? [];
-            $post->tags = json_decode($post->tags, true) ?? [];
-            return $post;
-        });
+        $post = DB::table('fblog_posts as p')
+    ->leftJoin('fblog_category_fblog_post as cp', 'cp.post_id', '=', 'p.id')
+    ->leftJoin('fblog_categories as c', 'c.id', '=', 'cp.category_id')
+    ->leftJoin('fblog_post_fblog_tag as pt', 'pt.post_id', '=', 'p.id')
+    ->leftJoin('fblog_tags as t', 't.id', '=', 'pt.tag_id')
+    ->leftJoin('users as u', 'u.id', '=', 'p.user_id')
+    ->leftJoin('fblog_seo_details as seo', 'seo.post_id', '=', 'p.id')
+    ->select(
+        'p.id',
+        'p.title',
+        'p.slug',
+        'p.sub_title',
+        'p.body',
+        'p.cover_photo_path',
+        'p.photo_alt_text',
+        'p.status',
+        'p.published_at',
+        'u.name as user_name',
+        'u.id as user_id',
+        'seo.title',
+        'seo.description',
+        'seo.keywords',
+        DB::raw("CONCAT('[', GROUP_CONCAT(DISTINCT JSON_OBJECT('id', c.id, 'name', c.name)), ']') as categories"),
+        DB::raw("CONCAT('[', GROUP_CONCAT(DISTINCT JSON_OBJECT('id', t.id, 'name', t.name)), ']') as tags")
+    )
+    ->where('p.slug', '=', $slug)
+    ->groupBy(
+        'p.id',
+        'p.title',
+        'p.slug',
+        'p.sub_title',
+        'p.body',
+        'p.cover_photo_path',
+        'p.photo_alt_text',
+        'p.status',
+        'p.published_at',
+        'u.name',
+        'u.id',
+        'seo.title',
+        'seo.description',
+        'seo.keywords'
+    )
+    ->first();
+
+if ($post) {
+    $post->categories = json_decode($post->categories ?? '[]', true);
+    $post->tags = json_decode($post->tags ?? '[]', true);
+}
+
         
-        if (!$posts) {
+        if (!$post) {
             return response()->json(['message' => 'Post not found'], 404);
         }
-        return response()->json($posts);
+        return response()->json($post);
     }
 
     public function latestPosts()
