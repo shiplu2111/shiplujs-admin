@@ -76,16 +76,16 @@ Route::get('/module-texts', [SettingController::class, 'moduleTexts']);
 
 // blog routes
 Route::get('/blog', [BlogController::class, 'index']);
-Route::get('/blog/{slug}', [BlogController::class, 'show']); // all data for single blog
 Route::get('/blog/latest', [BlogController::class, 'latest']);
-Route::get('/blog/popular', [BlogController::class, 'popularPosts']);
-Route::get('/blog/featured', [BlogController::class, 'featuredPosts']);
-Route::get('/blog/related/{slug}', [BlogController::class, 'relatedPosts']);
-Route::get('/blog/comments/{postId}', [BlogController::class, 'postComments']);
-Route::get('/blog/categories', [BlogController::class, 'categories']);
-Route::get('/blog/tags', [BlogController::class, 'tags']);
-Route::get('/blog/archives', [BlogController::class, 'archives']);
-Route::get('/blog/search', [BlogController::class, 'search']);
-Route::get('/category/{slug}/posts', [BlogController::class, 'categoryPosts']);
-Route::get('/tag/{slug}/posts', [BlogController::class, 'tagPosts']);
+//Route::get('/blog/popular', [BlogController::class, 'popularPosts']);
+//Route::get('/blog/featured', [BlogController::class, 'featuredPosts']);
+//Route::get('/blog/related/{slug}', [BlogController::class, 'relatedPosts']);
+//Route::get('/blog/comments/{postId}', [BlogController::class, 'postComments']);
+Route::get('/blog/categories/{slug}', [BlogController::class, 'categories']);
+Route::get('/blog/tags/{slug}', [BlogController::class, 'tags']);
+//Route::get('/blog/archives', [BlogController::class, 'archives']);
+Route::get('/blog/search/{search}', [BlogController::class, 'search']);
+Route::get('/blog/{slug}', [BlogController::class, 'show']); // all data for single blog
+//Route::get('/category/{slug}/posts', [BlogController::class, 'categoryPosts']);
+//Route::get('/tag/{slug}/posts', [BlogController::class, 'tagPosts']);
 // dashboard routes
