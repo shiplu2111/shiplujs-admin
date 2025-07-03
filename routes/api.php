@@ -76,7 +76,7 @@ Route::get('/module-texts', [SettingController::class, 'moduleTexts']);
 
 // blog routes
 Route::get('/blog', [BlogController::class, 'index']);
-Route::get('/blog/{slug}', [BlogController::class, 'show']);
+Route::get('/blog/{slug}', [BlogController::class, 'show']); // all data for single blog
 Route::get('/blog/latest', [BlogController::class, 'latestPosts']);
 Route::get('/blog/popular', [BlogController::class, 'popularPosts']);
 Route::get('/blog/featured', [BlogController::class, 'featuredPosts']);
